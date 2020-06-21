@@ -1,8 +1,9 @@
-/*APP*/
 .app {
     display: flex;
     flex-direction: row;
 }
+
+
 
 /*COLLECTIONS*/
 .collectionsInfo {
@@ -24,6 +25,10 @@
     width: 500px;   
 }
 
+.collection-select:hover{
+    color:red;
+    cursor: pointer;
+}
 
 /*ASSETS*/
 .assetsInfo{

@@ -7,19 +7,43 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      asstes: [] 
+      assets: [],
+      path:"",  //path of master img, from A to C
+      collectionId:0,  //default
+      defaultMasterId:0
     }
 }
 
-  callback = (dataFromCollection)=>{
-    this.setState({asstes:dataFromCollection})
+  getDataFromCollection = (dataFromCollection)=>{
+    this.setState({assets:dataFromCollection})
   }
 
+  getImgFromMaster = (imgFromMaster)=>{
+    this.setState({path:imgFromMaster})
+  }
+
+  getCollectionId = (collectionId)=>{
+    this.setState({collectionId:collectionId})
+  }
+
+  getDefaultMasterId = (defaultMasterId)=> {
+    this.setState({defaultMasterId:defaultMasterId})
+  }
+
+
   render(){
+    //console.log("IIIIDDDD"+this.state.defaultMasterId)
     return(
       <div className="app">
-        <CollectionsInfo appCallback={this.callback}/>
-        <AssetsInfo selectedAssets={this.state.asstes}/>
+        <CollectionsInfo getDataFromCollection={this.getDataFromCollection}
+          getDefaultMasterId={this.getDefaultMasterId} 
+          masterPath={this.state.path} 
+          collectionId={this.state.collectionId} />
+
+        <AssetsInfo selectedAssets={this.state.assets}
+          defaultMasterId={this.state.defaultMasterId} 
+          getImgFromMaster={this.getImgFromMaster} 
+          getCollectionId={this.getCollectionId} />
       </div>
     )
   }
