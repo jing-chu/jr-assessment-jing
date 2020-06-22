@@ -32,8 +32,8 @@ export default class CollectionsInfo extends React.Component {
             ID={collection.id}
             name={collection.name}
             masterAssetId={collection.masterAssetId}
-            getDataFromCollection={this.props.getDataFromCollection}
-            getDefaultMasterId={this.props.getDefaultMasterId}
+            setDataFromCollection={this.props.setDataFromCollection}
+            setDefaultMasterId={this.props.setDefaultMasterId}
             masterPath={this.props.masterPath}
             collectionId={this.props.collectionId}
           />
@@ -57,7 +57,8 @@ export class CollectionCard extends React.Component {
     //console.dir(this.props)
     let collectionID = this.props.ID
     getAssetsByCollectionAsync(collectionID).then((data) => {
-      this.props.getDataFromCollection(data)
+      this.props.setDataFromCollection(data)
+      this.props.setDefaultMasterId(this.props.masterAssetId)
     })
   }
 
@@ -65,7 +66,7 @@ export class CollectionCard extends React.Component {
    let defaultMasterID = this.props.masterAssetId
    getAssetByIdAsync(defaultMasterID).then((data) => {
     this.setState({defaultMasterPath:"/images/"+data.path})
-    this.props.getDefaultMasterId(defaultMasterID)
+    
     })    
   }
 
@@ -74,7 +75,7 @@ export class CollectionCard extends React.Component {
       <div className="collection-card">
         <img src={this.props.masterPath!=='' && this.props.ID===this.props.collectionId? 
           this.props.masterPath : 
-          this.state.defaultMasterPath} alt="profile" width="150" height="150" />
+          this.state.defaultMasterPath} alt={this.props.name} width="150" height="150" />
         <div className="collection-detail">
           <p className="collection-select" onClick={this.handleClick}>
             {this.props.name}

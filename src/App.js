@@ -14,36 +14,37 @@ export default class App extends React.Component {
     }
 }
 
-  getDataFromCollection = (dataFromCollection)=>{
+  setDataFromCollection = (dataFromCollection)=>{
     this.setState({assets:dataFromCollection})
   }
 
-  getImgFromMaster = (imgFromMaster)=>{
+  setImgFromMaster = (imgFromMaster)=>{
     this.setState({path:imgFromMaster})
   }
 
-  getCollectionId = (collectionId)=>{
+  setCollectionId = (collectionId)=>{
     this.setState({collectionId:collectionId})
   }
 
-  getDefaultMasterId = (defaultMasterId)=> {
+  setDefaultMasterId = (defaultMasterId)=> {
     this.setState({defaultMasterId:defaultMasterId})
   }
 
 
   render(){
-    //console.log("IIIIDDDD"+this.state.defaultMasterId)
+    //console.log(this.state.assets)
     return(
       <div className="app">
-        <CollectionsInfo getDataFromCollection={this.getDataFromCollection}
-          getDefaultMasterId={this.getDefaultMasterId} 
+        <CollectionsInfo setDataFromCollection={this.setDataFromCollection}
+          setDefaultMasterId={this.setDefaultMasterId} 
           masterPath={this.state.path} 
           collectionId={this.state.collectionId} />
-
+   
         <AssetsInfo selectedAssets={this.state.assets}
+          collectionId={this.state.assets.length==0 ? 0 : this.state.assets[0].collectionId}
           defaultMasterId={this.state.defaultMasterId} 
-          getImgFromMaster={this.getImgFromMaster} 
-          getCollectionId={this.getCollectionId} />
+          setImgFromMaster={this.setImgFromMaster} 
+          setCollectionId={this.setCollectionId} />
       </div>
     )
   }
