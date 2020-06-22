@@ -19,6 +19,9 @@ export default class CollectionsInfo extends React.Component {
       this.setState({
         collections: data
       })
+      data.forEach(collection=>{
+        this.props.setDefaultMasterId(collection.id, collection.masterAssetId)
+      })
     })
   }
 
@@ -31,11 +34,12 @@ export default class CollectionsInfo extends React.Component {
             key={collection.id}
             ID={collection.id}
             name={collection.name}
-            masterAssetId={collection.masterAssetId}
+            //masterAssetId={collection.masterAssetId}
             setDataFromCollection={this.props.setDataFromCollection}
             setDefaultMasterId={this.props.setDefaultMasterId}
-            masterPath={this.props.masterPath}
-            collectionId={this.props.collectionId}
+            //masterPath={this.props.masterPath}
+            masterId={this.props.masterIdObj[collection.id] || collection.masterAssetId}
+            collectionId={collection.id}
           />
         )}
       </div>
@@ -47,35 +51,34 @@ export class CollectionCard extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      defaultMasterPath:""
+      masterPath:""
     }
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  updateCollectionIcon=(masterId)=>{
+    getAssetByIdAsync(masterId).then((data) => {
+      this.setState({masterPath:"/images/"+data.path})   
+    })
   }
 
   handleClick=(e)=>{
     e.preventDefault()
     //console.dir(this.props)
-    let collectionID = this.props.ID
-    getAssetsByCollectionAsync(collectionID).then((data) => {
+    let collectionId = this.props.ID
+    getAssetsByCollectionAsync(collectionId).then((data) => {
       this.props.setDataFromCollection(data)
-      this.props.setDefaultMasterId(this.props.masterAssetId)
+      //this.props.setDefaultMasterId(this.props.collectionId, this.props.masterAssetId)
     })
   }
 
-  componentDidMount(){
-   let defaultMasterID = this.props.masterAssetId
-   getAssetByIdAsync(defaultMasterID).then((data) => {
-    this.setState({defaultMasterPath:"/images/"+data.path})
-    
-    })    
-  }
+  componentDidMount(){this.updateCollectionIcon(this.props.masterId)}
+  componentWillReceiveProps(props){this.updateCollectionIcon(props.masterId)}
 
   render() {    
     return (
       <div className="collection-card">
-        <img src={this.props.masterPath!=='' && this.props.ID===this.props.collectionId? 
-          this.props.masterPath : 
-          this.state.defaultMasterPath} alt={this.props.name} width="150" height="150" />
+        <img src={this.state.masterPath} alt={this.props.name} width="150" height="150" />
         <div className="collection-detail">
           <p className="collection-select" onClick={this.handleClick}>
             {this.props.name}

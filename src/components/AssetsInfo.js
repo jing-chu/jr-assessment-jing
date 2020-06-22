@@ -10,27 +10,9 @@ import CollectionsInfo from './CollectionsInfo'
 export default class AssetsInfo extends React.Component {
   constructor(props) {
     super(props);
-     this.state ={
-     masterID: 0
-  }
   }
  
-  componentWillReceiveProps(props){
-    //console.log(props.collectionId)
-    //console.log(this.props.collectionId)
-    if(props.collectionId!==this.props.collectionId){
-      this.setState({masterID:props.defaultMasterId})
-    }
-  }
-
-  setMasterID=(state)=>{
-    this.setState({
-      masterID: state
-    })
-  }
-
   render() {
-    
     return (
       <div className="assetsInfo">
         <h1>Assets Info</h1>
@@ -43,9 +25,9 @@ export default class AssetsInfo extends React.Component {
             collectionId={asset.collectionId}
             setImgFromMaster={this.props.setImgFromMaster}
             setCollectionId={this.props.setCollectionId}
-            defaultMasterId={this.props.defaultMasterId}
-            setMasterID={this.setMasterID}
-            masterID={this.state.masterID}
+            //defaultMasterId={this.props.defaultMasterId}
+            setMasterId={this.props.setMasterId}
+            masterId={this.props.masterId}
             //selectedAssets={this.props.selectedAssets}
           />
         )}
@@ -57,15 +39,13 @@ export default class AssetsInfo extends React.Component {
 export class AssetCard extends React.Component {
   constructor(props) {
     super(props) 
-    this.setMaster = this.setMaster.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount(){
-  
-  }
-
-  setMaster() {
-    this.props.setMasterID(this.props.ID)
+  handleClick(e) {
+    e.preventDefault()
+    console.log(this.props.setMasterId)
+    this.props.setMasterId(this.props.collectionId, this.props.ID)
     this.props.setImgFromMaster(this.props.path)
     this.props.setCollectionId(this.props.collectionId)
   }
@@ -74,7 +54,7 @@ export class AssetCard extends React.Component {
   render() {
     
     //console.log("defaultMasterId"+this.props.defaultMasterId)
-    //console.log("masterID"+this.props.masterID)
+    //console.log("masterId"+this.props.masterId)
     return (
       <div className="asset-card">
         <img src={this.props.path} alt={this.props.name} width="150" height="150" />
@@ -82,9 +62,9 @@ export class AssetCard extends React.Component {
           <p>Name: {this.props.name}</p>
           <p>ID: {this.props.ID}</p>
           {  
-            (this.props.ID===this.props.masterID) ?
+            (this.props.ID===this.props.masterId) ?
               <FontAwesomeIcon icon={faThumbtack} size="2x" />
-              : <button className="master" onClick={this.setMaster}>
+              : <button className="master" onClick={this.handleClick}>
                   Set Master
                 </button>
           }
