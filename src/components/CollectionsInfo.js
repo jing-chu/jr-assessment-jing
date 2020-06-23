@@ -3,6 +3,7 @@ import "../styles.css"
 import { getCollectionsAsync } from "../api/data.js"
 import { getAssetsByCollectionAsync } from "../api/data.js"
 import { getAssetByIdAsync } from "../api/data.js"
+import { faJoint } from "@fortawesome/free-solid-svg-icons"
 
 
 export default class CollectionsInfo extends React.Component {
@@ -18,10 +19,14 @@ export default class CollectionsInfo extends React.Component {
       this.setState({
         collections: data
       })
-      data.forEach(collection=>{
+      data.forEach(collection => {
         this.props.setDefaultMasterId(collection.id, collection.masterAssetId)
       })
     })
+  }
+
+  getRecurName(tag) {
+    return tag.name + ">" + (('subTag' in tag) ? this.getRecurName(tag.subTag) : "")
   }
 
   render() {
@@ -33,6 +38,7 @@ export default class CollectionsInfo extends React.Component {
             key={collection.id}
             ID={collection.id}
             name={collection.name}
+            tag={this.getRecurName(collection.tags).slice(0, -1)}
             setDataFromCollection={this.props.setDataFromCollection}
             masterId={this.props.masterIdObj[collection.id] || collection.masterAssetId}
           />
@@ -45,19 +51,19 @@ export default class CollectionsInfo extends React.Component {
 export class CollectionCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      masterPath:""
+    this.state = {
+      masterPath: ""
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
-  updateCollectionIcon=(masterId)=>{
+  updateCollectionIcon = (masterId) => {
     getAssetByIdAsync(masterId).then((data) => {
-      this.setState({masterPath:"/images/"+data.path})   
+      this.setState({ masterPath: "/images/" + data.path })
     })
   }
 
-  handleClick=(e)=>{
+  handleClick = (e) => {
     e.preventDefault()
     let collectionId = this.props.ID
     getAssetsByCollectionAsync(collectionId).then((data) => {
@@ -65,21 +71,24 @@ export class CollectionCard extends React.Component {
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.updateCollectionIcon(this.props.masterId)
   }
-  componentWillReceiveProps(props){
+  componentWillReceiveProps(props) {
     this.updateCollectionIcon(props.masterId)
-  }   
-  
-  render() {    
+  }
+
+  render() {
     return (
-      <div className="collection-card">
-        <img className="collection-img" src={this.state.masterPath} alt={this.props.name} onClick={this.handleClick} width="150" height="150" />
-        <div className="collection-detail">
-          <p className="collection-select" onClick={this.handleClick}>
-            {this.props.name}
-          </p>
+      <div>
+        <p >{this.props.tag}</p>
+        <div className="collection-card">
+          <img className="collection-img" src={this.state.masterPath} alt={this.props.name} onClick={this.handleClick} width="150" height="150" />
+          <div className="collection-detail">
+            <p className="collection-select" onClick={this.handleClick}>
+              {this.props.name}
+            </p>
+          </div>
         </div>
       </div>
     )

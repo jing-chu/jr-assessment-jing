@@ -30,6 +30,10 @@
     cursor: pointer;
 }
 
+.collection-select{
+text-decoration: underline;
+}
+
 .collection-img:hover{
     cursor: pointer; 
 }
