@@ -30,6 +30,12 @@
     cursor: pointer;
 }
 
+.collection-img:hover{
+    cursor: pointer; 
+}
+
+
+
 /*ASSETS*/
 .assetsInfo{
     display: flex;
@@ -37,6 +43,20 @@
     width: 50%;
     height: auto;
     padding: 10px;
+}
+
+.sortForm{
+    position: relative;    
+    margin: 40px 10px;
+    
+}
+
+.sort-label{
+    font-size: large;
+}
+
+.sort-select{
+    cursor: pointer;
 }
 
 .asset-card{
