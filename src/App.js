@@ -23,11 +23,10 @@ export default class App extends React.Component {
     T[collectionId]=masterId
     this.setState({masterIdObj: T})
   }
-  
 
   render(){
     const curMasterId=this.state.assets.length===0 ? 0 : 
-      this.state.masterIdObj[this.state.assets[0].collectionId]  ////?????
+      this.state.masterIdObj[this.state.assets[0].collectionId]  
 
     return(
       <div className="app">

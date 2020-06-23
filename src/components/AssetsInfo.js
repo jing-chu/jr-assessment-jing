@@ -12,9 +12,23 @@ export default class AssetsInfo extends React.Component {
     }
   }
 
-  setSortAssets = (sortAssets)=>{
+
+  setSortAssets = (sortKey)=>{
+    const compare_fun=(a, b)=>{
+      if(a[sortKey] < b[sortKey]){
+              return -1;
+      }else if(a[sortKey] > b[sortKey]){
+              return 1;
+      }else{
+              return 0;
+      }
+    }
+    this.setState({sortAssets: this.state.sortAssets.sort(compare_fun)})
+  }
+
+  componentWillReceiveProps(props){
     this.setState({
-      sortAssets:sortAssets
+      sortAssets: props.selectedAssets
     })
   }
 
@@ -26,7 +40,6 @@ export default class AssetsInfo extends React.Component {
             this.props.selectedAssets.length!==0?
             <SortForm 
             setSortAssets={this.setSortAssets}
-            selectedAssets={this.props.selectedAssets} 
             /> 
             : null
           }
@@ -34,8 +47,8 @@ export default class AssetsInfo extends React.Component {
         </div>
         
         <div className="assetsInfo">
-          {this.state.sortAssets.length===0 ? 
-            this.props.selectedAssets.map(asset =>
+          {
+            this.state.sortAssets.map(asset =>
               <AssetCard
                 key={asset.id}
                 ID={asset.id}
@@ -44,20 +57,9 @@ export default class AssetsInfo extends React.Component {
                 collectionId={asset.collectionId}
                 setMasterId={this.props.setMasterId}
                 masterId={this.props.masterId}
+                
               />)
-            : this.state.sortAssets.map(
-              asset =>
-              <AssetCard
-                key={asset.id}
-                ID={asset.id}
-                name={asset.name}
-                path={`/images/${asset.path}`}
-                collectionId={asset.collectionId}
-                setMasterId={this.props.setMasterId}
-                masterId={this.props.masterId}
-              />
-            )
-        }
+         }
         </div>
       </div>
     )
@@ -77,29 +79,7 @@ export class SortForm extends React.Component {
   }
 
   handleSubmit(event) {
-    let assetArr = this.props.selectedAssets
-    function compare_name(a, b){
-      if(a.name < b.name){
-              return -1;
-      }else if(a.name > b.name){
-              return 1;
-      }else{
-              return 0;
-      }
-    }
-    function compare_id(a, b){
-      if(a.id < b.id){
-              return -1;
-      }else if(a.id > b.id){
-              return 1;
-      }else{
-              return 0;
-      }
-    }
-    this.state.value==='name'? 
-      assetArr.sort(compare_name) 
-      : assetArr.sort(compare_id)
-    this.props.setSortAssets(assetArr)
+    this.props.setSortAssets(this.state.value)
     event.preventDefault();
   }
 
@@ -115,7 +95,7 @@ export class SortForm extends React.Component {
             <option value="id">Id</option>
           </select>
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Sort" />
       </form>
     );
   }

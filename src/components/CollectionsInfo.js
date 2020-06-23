@@ -70,7 +70,7 @@ export class CollectionCard extends React.Component {
   }
   componentWillReceiveProps(props){
     this.updateCollectionIcon(props.masterId)
-  }   /// ?????
+  }   
   
   render() {    
     return (
