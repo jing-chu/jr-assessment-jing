@@ -109,7 +109,6 @@ export class AssetCard extends React.Component {
 
   handleClick(e) {
     e.preventDefault()
-    console.log(this.props.setMasterId)
     this.props.setMasterId(this.props.collectionId, this.props.ID)
   }
 

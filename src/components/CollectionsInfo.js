@@ -26,7 +26,9 @@ export default class CollectionsInfo extends React.Component {
   }
 
   getRecurName(tag) {
-    return tag.name + ">" + (('subTag' in tag) ? this.getRecurName(tag.subTag) : "")
+    return ('subTag' in tag) ? 
+      (tag.name + " > " + this.getRecurName(tag.subTag)) :
+      tag.name
   }
 
   render() {
@@ -38,7 +40,7 @@ export default class CollectionsInfo extends React.Component {
             key={collection.id}
             ID={collection.id}
             name={collection.name}
-            tag={this.getRecurName(collection.tags).slice(0, -1)}
+            tag={this.getRecurName(collection.tags)}
             setDataFromCollection={this.props.setDataFromCollection}
             masterId={this.props.masterIdObj[collection.id] || collection.masterAssetId}
           />
