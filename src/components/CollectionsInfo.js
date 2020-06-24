@@ -25,10 +25,11 @@ export default class CollectionsInfo extends React.Component {
     })
   }
 
-  getRecurName(tag) {
-    return ('subTag' in tag) ? 
-      (tag.name + " > " + this.getRecurName(tag.subTag)) :
-      tag.name
+  getRecurName(tag){
+    if('subTag' in tag === false){
+      return tag.name
+    }
+    return `${tag.name} > ${this.getRecurName(tag.subTag)}`
   }
 
   render() {
