@@ -53,7 +53,7 @@ export default class AssetsInfo extends React.Component {
                 key={asset.id}
                 ID={asset.id}
                 name={asset.name}
-                path={`/images/${asset.path}`}
+                path={`https://jing-chu.github.io/jr-assessment-jing/images/${asset.path}`}
                 collectionId={asset.collectionId}
                 setMasterId={this.props.setMasterId}
                 masterId={this.props.masterId}

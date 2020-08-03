@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/jr-assessment-jing/static/css/main.07a20f73.chunk.css",
+    "main.js": "/jr-assessment-jing/static/js/main.14cc3cf3.chunk.js",
+    "main.js.map": "/jr-assessment-jing/static/js/main.14cc3cf3.chunk.js.map",
+    "runtime-main.js": "/jr-assessment-jing/static/js/runtime-main.7ac16adb.js",
+    "runtime-main.js.map": "/jr-assessment-jing/static/js/runtime-main.7ac16adb.js.map",
+    "static/js/2.a1f345b0.chunk.js": "/jr-assessment-jing/static/js/2.a1f345b0.chunk.js",
+    "static/js/2.a1f345b0.chunk.js.map": "/jr-assessment-jing/static/js/2.a1f345b0.chunk.js.map",
+    "index.html": "/jr-assessment-jing/index.html",
+    "precache-manifest.0c8611eda699af6276ad6470704844d3.js": "/jr-assessment-jing/precache-manifest.0c8611eda699af6276ad6470704844d3.js",
+    "service-worker.js": "/jr-assessment-jing/service-worker.js",
+    "static/css/main.07a20f73.chunk.css.map": "/jr-assessment-jing/static/css/main.07a20f73.chunk.css.map",
+    "static/js/2.a1f345b0.chunk.js.LICENSE.txt": "/jr-assessment-jing/static/js/2.a1f345b0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7ac16adb.js",
+    "static/js/2.a1f345b0.chunk.js",
+    "static/css/main.07a20f73.chunk.css",
+    "static/js/main.14cc3cf3.chunk.js"
+  ]
+}

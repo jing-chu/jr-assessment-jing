@@ -62,7 +62,7 @@ export class CollectionCard extends React.Component {
 
   updateCollectionIcon = (masterId) => {
     getAssetByIdAsync(masterId).then((data) => {
-      this.setState({ masterPath: "/images/" + data.path })
+      this.setState({ masterPath: "https://jing-chu.github.io/jr-assessment-jing/images/" + data.path })
     })
   }
 
