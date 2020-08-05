@@ -1,4 +1,4 @@
-## Hello, this is the Site link: (https://jing-chu.github.io/jr-assessment-jing/).
+## Hello, this is the site link: (https://jing-chu.github.io/jr-assessment-jing/).
 
 
 
