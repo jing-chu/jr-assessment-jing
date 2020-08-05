@@ -1,4 +1,12 @@
+## Hello, this is the Site link: (https://jing-chu.github.io/jr-assessment-jing/).
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
